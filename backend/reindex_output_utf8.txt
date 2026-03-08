@@ -1,0 +1,55 @@
+﻿Indexing Compliance_Policy_Sample.pdf (Path: ./data\5d2c509e-a2ea-4a18-a030-440fc675ba9c_Compliance_Policy_Sample.pdf)...
+  Extracted 1 chunks.
+  Generated 1 embeddings.
+  Added 1 chunks to vector store.
+Indexing Vendor_Contract_Sample.pdf (Path: ./data\c2174b85-2d74-4bc9-851a-a47412e02cc2_Vendor_Contract_Sample.pdf)...
+  Extracted 1 chunks.
+  Generated 1 embeddings.
+  Added 1 chunks to vector store.
+Indexing Financial_Report_Q4_2025.pdf (Path: ./data\7a70fd07-1439-4e48-b2ce-88e21fae7d8e_Financial_Report_Q4_2025.pdf)...
+  Extracted 1 chunks.
+  Generated 1 embeddings.
+  Added 1 chunks to vector store.
+Indexing Cybersecurity_Policy.pdf (Path: ./data\02d11264-0ab6-495e-ad6d-412b4aa70471_Cybersecurity_Policy.pdf)...
+  Extracted 1 chunks.
+  Generated 1 embeddings.
+  Added 1 chunks to vector store.
+Indexing Employee_Reimbursement_Policy.pdf (Path: ./data\4d92e240-8737-4789-8f5d-9e96744ec181_Employee_Reimbursement_Policy.pdf)...
+  Extracted 1 chunks.
+  Generated 1 embeddings.
+  Added 1 chunks to vector store.
+Indexing GDPR_Compliance_Policy.pdf (Path: ./data\847c01f4-04f5-46e6-b233-b37ee03e6b0f_GDPR_Compliance_Policy.pdf)...
+  Extracted 1 chunks.
+  Generated 1 embeddings.
+  Added 1 chunks to vector store.
+Indexing Vendor_Service_Agreement.pdf (Path: ./data\03ad27f0-c814-4f19-946a-88d27e6caeb9_Vendor_Service_Agreement.pdf)...
+  Extracted 1 chunks.
+  Generated 1 embeddings.
+  Added 1 chunks to vector store.
+Indexing Financial_Report_Q4.pdf (Path: ./data\395f2ff0-d2a7-411a-86bc-c04e0ce90264_Financial_Report_Q4.pdf)...
+  Extracted 1 chunks.
+  Generated 1 embeddings.
+  Added 1 chunks to vector store.
+Indexing Employee_HR_Handbook.pdf (Path: ./data\9e3506fb-f830-43a5-b584-b1614ed9673d_Employee_HR_Handbook.pdf)...
+  Extracted 1 chunks.
+  Generated 1 embeddings.
+  Added 1 chunks to vector store.
+Indexing Compliance_Policy_Sample.pdf (Path: ./data\bd756720-a86a-430d-aac1-ccf62fd8af92_Compliance_Policy_Sample.pdf)...
+  Extracted 1 chunks.
+  Generated 1 embeddings.
+  Added 1 chunks to vector store.
+Indexing Vendor_Contract_Sample.pdf (Path: ./data\70c14b40-7e2e-4e0d-be6d-19b32cf952b6_Vendor_Contract_Sample.pdf)...
+  Extracted 1 chunks.
+  Generated 1 embeddings.
+  Added 1 chunks to vector store.
+Indexing Financial_Report_Q4_2025.pdf (Path: ./data\93f3be00-6357-439f-868a-dd1cd22ca808_Financial_Report_Q4_2025.pdf)...
+  Extracted 1 chunks.
+  Generated 1 embeddings.
+  Added 1 chunks to vector store.
+Indexing HR_Policy_Sample.pdf (Path: ./data\8a41f31c-ea2e-4075-b4f0-3ebb0e9906d6_HR_Policy_Sample.pdf)...
+  Extracted 1 chunks.
+  Generated 1 embeddings.
+  Added 1 chunks to vector store.
+
+Final Stats: {'total_embeddings': 13}
+Successfully re-indexed 13 documents. Skipped/Already indexed: 0

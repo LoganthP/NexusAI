@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Production & Build
+dist/
+dist-ssr/
+*.local
+
+# Data & Database
+vector_db/
+data/
+*.sqlite
+*.db
+settings.json
+
+# Environment / Secrets
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.log
+
+# Temp / Scratch
+frontend-temp/
+temp/
+tmp/
+*.tmp
