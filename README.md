@@ -74,25 +74,30 @@ Features:
 ---
 
 # 🏗️ System Architecture
-
 ```mermaid
 flowchart TB
 
 User[User / Enterprise Client]
 
-subgraph Frontend
-UI[React + Vite UI]
+subgraph Frontend Layer
+UI[React + Vite Dashboard]
+AuthUI[Authentication UI]
 end
 
-subgraph Backend
-API[FastAPI Gateway]
+subgraph API Gateway
+Gateway[FastAPI Gateway]
+end
+
+subgraph Core Services
 ChatService[Chat Service]
 DocService[Document Service]
 AnalyticsService[Analytics Service]
+AuthService[Auth Service]
 end
 
 subgraph AI Layer
-Retriever[Vector Retriever]
+Intent[Intent Detection]
+Retriever[Semantic Retriever]
 Reranker[Context Reranker]
 PromptBuilder[Prompt Builder]
 LLM[LLM Engine]
@@ -100,83 +105,117 @@ end
 
 subgraph Data Layer
 VectorDB[(Vector Database)]
-DocStorage[(Document Storage)]
+DocStore[(Document Storage)]
 SQLDB[(Application Database)]
 end
 
+subgraph AI Models
+EmbedModel[Embedding Model]
+LocalLLM[Ollama Llama3]
+end
+
 User --> UI
-UI --> API
+UI --> Gateway
 
-API --> ChatService
-API --> DocService
-API --> AnalyticsService
+Gateway --> ChatService
+Gateway --> DocService
+Gateway --> AnalyticsService
+Gateway --> AuthService
 
-ChatService --> Retriever
+ChatService --> Intent
+Intent --> Retriever
 Retriever --> VectorDB
 
 Retriever --> Reranker
 Reranker --> PromptBuilder
 
 PromptBuilder --> LLM
+LLM --> LocalLLM
 
-DocService --> DocStorage
-DocService --> VectorDB
+DocService --> DocStore
+DocService --> EmbedModel
+EmbedModel --> VectorDB
 
 AnalyticsService --> SQLDB
+AuthService --> SQLDB
+```
+## Query Processing Flow
+```mermaid
+sequenceDiagram
+
+participant User
+participant Frontend
+participant API
+participant Retriever
+participant VectorDB
+participant LLM
+
+User->>Frontend: Ask Question
+Frontend->>API: POST /chat
+API->>Retriever: Process Query
+Retriever->>VectorDB: Similarity Search
+VectorDB-->>Retriever: Relevant Chunks
+Retriever->>LLM: Build Prompt + Context
+LLM-->>API: Generated Answer
+API-->>Frontend: Response
+Frontend-->>User: Display Answer
 ```
 
-⚙️ Tech Stack
-Frontend
+# ⚙️ Tech Stack
 
-React
+## Frontend
 
-Vite
+- React
+- Vite
+- TypeScript
+- TailwindCSS
+- ShadCN UI
+- Framer Motion
 
-TypeScript
+---
 
-TailwindCSS
+## Backend
 
-ShadCN UI
+- FastAPI
+- LangChain
+- SentenceTransformers
+- Pydantic
 
-Framer Motion
+---
 
-Backend
+## AI Stack
 
-FastAPI
+| Component | Technology |
+|-----------|------------|
+| LLM | Llama 3 via Ollama |
+| Embeddings | BAAI/bge-base-en-v1.5 |
+| Vector Database | DuckDB |
+| RAG Framework | LangChain |
 
-LangChain
+---
 
-SentenceTransformers
-
-Pydantic
-
-AI Stack
-Component	Technology
-LLM	Llama 3 via Ollama
-Embeddings	BAAI/bge-base-en-v1.5
-Vector Database	DuckDB
-RAG Framework	LangChain
-📂 Project Structure
+# 📂 Project Structure
+```
 enterprise-rag-platform
 │
 ├── frontend
-│   ├── src
-│   │   ├── components
-│   │   ├── pages
-│   │   ├── store
-│   │   ├── services
-│   │   └── lib
+│ ├── src
+│ │ ├── components
+│ │ ├── pages
+│ │ ├── store
+│ │ ├── services
+│ │ └── lib
 │
 ├── backend
-│   ├── api
-│   ├── rag
-│   ├── ingestion
-│   ├── embeddings
-│   ├── services
-│   └── models
+│ ├── api
+│ ├── rag
+│ ├── ingestion
+│ ├── embeddings
+│ ├── services
+│ └── models
 │
 ├── data
-│   └── samples
+│ └── samples
 │
 ├── vector_db
 │
@@ -186,156 +225,159 @@ enterprise-rag-platform
 │
 ├── docker-compose.yml
 └── .env.example
-🚀 Installation Guide
-1️⃣ Clone Repository
+```
+
+---
+
+# 🚀 Installation Guide
+
+## Clone Repository
+
+```bash
 git clone https://github.com/yourusername/nexus-ai-rag.git
-
 cd nexus-ai-rag
-🛠️ Backend Setup
-cd backend
-
-python -m venv .venv
-
-# Windows
+```
+Windows
+```
 .\.venv\Scripts\activate
-
-# Linux/Mac
+```
+Linux / Mac
+```
 source .venv/bin/activate
-
+```
+## Install dependencies:
+```
 pip install -r requirements.txt
-
+```
+## Run backend:
+```
 uvicorn api.main:app --reload --port 8000
-
-Backend API:
-
+```
+## Backend API:
+```
 http://localhost:8000
-
-API Docs:
-
+```
+## API Docs:
+```
 http://localhost:8000/docs
-💻 Frontend Setup
+```
+
+## Frontend Setup
+```
 cd frontend
-
 npm install
-
 npm run dev
-
+```
 Frontend:
-
+```
 http://localhost:3000
-🐳 Docker Deployment
+```
 
-Run the entire platform with one command:
+## 🐳 Docker Deployment
 
+Run the entire platform:
+```
 docker-compose up --build
-
+```
 This launches:
+-> frontend
+-> backend
+-> vector database
+-> AI services
 
-frontend
-
-backend
-
-vector database
-
-AI services
-
-⚙️ Environment Variables
+## ⚙️ Environment Variables
 
 Create .env from .env.example.
-
 Example:
-
+```
 OPENAI_API_KEY=
-
 JWT_SECRET=super_secret_key
-
 VECTOR_DB_PATH=./vector_db
-
 DATABASE_URL=sqlite:///./data/rag.db
-📘 API Endpoints
-Method	Endpoint	Description
-POST	/api/chat/	Query AI assistant
-POST	/api/documents/upload	Upload documents
-GET	/api/documents/	List documents
-DELETE	/api/documents/{id}	Delete document
-GET	/api/analytics/stats	System analytics
-POST	/api/auth/login	Authenticate user
-🧪 Testing
+```
+
+## 📘 API Endpoints
+
+| Method | Endpoint | Description |
+|------|------|-------------|
+| POST | `/api/chat/` | Query AI assistant |
+| POST | `/api/documents/upload` | Upload documents |
+| GET | `/api/documents/` | List all documents |
+| DELETE | `/api/documents/{id}` | Delete a document |
+| GET | `/api/analytics/stats` | Retrieve system analytics |
+| POST | `/api/auth/login` | Authenticate user and obtain JWT token |
+
+---
+
+## 🧪 Testing
 
 Run backend tests:
 
+```bash
 cd backend
-
 pytest tests/
-⚡ Performance Optimizations
-Vector Search Optimization
+```
 
-semantic embeddings
+## ⚡ Performance Optimizations
 
-similarity threshold filtering
+### Vector Search Optimization
+- Semantic embeddings for accurate retrieval
+- Similarity threshold filtering
+- Top-K document retrieval
 
-top-k retrieval
+### Context Optimization
+- Document chunking strategy
+- Context compression
+- Optimized prompt engineering
 
-Context Optimization
+### AI Pipeline Improvements
+- Hybrid RAG routing
+- Context reranking
+- Query intent classification
 
-document chunking strategy
+---
 
-context compression
+## 📈 Scalability Strategy
 
-optimized prompts
+| Layer | Scaling Method |
+|------|----------------|
+| Frontend | CDN + static hosting |
+| Backend | Horizontal scaling with load balancing |
+| Vector DB | Distributed vector storage |
+| LLM | Local inference or cloud scaling |
 
-AI Pipeline Improvements
+---
 
-hybrid RAG routing
+## ⚙️ Caching Strategy
 
-reranking
+| Cache Type | Purpose |
+|-----------|---------|
+| Query Cache | Store previous responses |
+| Embedding Cache | Reuse computed embeddings |
+| Document Cache | Store processed document chunks |
+| Model Cache | Keep LLM loaded in memory |
 
-query classification
+---
 
-📈 Scalability Strategy
-Layer	Scaling Method
-Frontend	CDN + static hosting
-Backend	Horizontal scaling
-Vector DB	Distributed vector storage
-LLM	Local inference or cloud scaling
-⚙️ Caching Strategy
-Cache Type	Purpose
-Query Cache	store previous responses
-Embedding Cache	reuse embeddings
-Document Cache	store processed chunks
-Model Cache	keep LLM loaded in memory
-🔐 Authentication
+## 🔐 Authentication
 
-The platform supports role-based access.
+The platform supports **Role-Based Access Control (RBAC)**.
 
-Role	Permissions
-Admin	Full access
-Manager	Document + analytics
-Employee	Chat + knowledge base
-🔮 Future Roadmap
+| Role | Permissions |
+|------|-------------|
+| Admin | Full system control |
+| Manager | Document management + analytics |
+| Employee | Chat access + document search |
 
-Upcoming upgrades include:
+---
 
-Hybrid search (BM25 + vector)
+## 🔮 Future Roadmap
 
-RAG reranking
+Planned improvements include:
 
-Query intent detection
-
-Graph RAG architecture
-
-Multi-agent AI reasoning
-
-Enterprise SSO support
-
-🤝 Contributing
-
-Contributions are welcome!
-
-Fork repository
-Create feature branch
-Commit changes
-Open pull request
-📄 License
-
-MIT License
+- Hybrid search (BM25 + vector search)
+- RAG reranking with cross-encoders
+- Query intent detection
+- Graph-based RAG architecture
+- Multi-agent AI reasoning
+- Enterprise SSO integration
