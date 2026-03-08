@@ -240,7 +240,100 @@ enterprise-rag-platform
 ```
 
 ---
+### Development Setup Guide
+## Prerequisites
 
+- Python 3.9+
+- Node.js 18+
+- npm
+
+---
+
+## 1️⃣ Backend Environment Initialization
+
+```bash
+cd backend
+python -m venv .venv
+```
+
+---
+
+## 2️⃣ Configuration & Environment Variables
+
+```bash
+# From project root
+copy .env.example .env
+
+# Sync environment file to backend
+copy .env backend\.env
+```
+
+---
+
+## 3️⃣ Frontend Dependency Installation
+
+```bash
+cd frontend
+npm install --legacy-peer-deps
+```
+
+---
+
+## 4️⃣ Backend Dependency Installation & Bug Fixes
+
+```bash
+cd backend
+
+# Install core backend dependencies
+.\.venv\Scripts\python -m pip install fastapi uvicorn python-multipart
+
+# Install remaining dependencies from requirements file
+.\.venv\Scripts\python -m pip install -r requirements.txt
+
+# Fix for missing LangChain Ollama integration
+.\.venv\Scripts\python -m pip install langchain-ollama
+```
+
+> **Note:** The final pip install resolves the missing `langchain-ollama` dependency error encountered during backend startup.
+
+## 5️⃣ Running the Services
+
+### Start Backend API
+
+```bash
+cd backend
+.\.venv\Scripts\python -m uvicorn api.main:app --reload --port 8000
+```
+
+| Service | URL |
+|---|---|
+| Backend API | http://localhost:8000 |
+| API Docs (Swagger) | http://localhost:8000/docs |
+
+
+### Start Frontend Application
+
+```bash
+cd frontend
+npm run dev
+```
+
+| Service | URL |
+|---|---|
+| Frontend Interface | http://localhost:3000 |
+
+## Quick Reference
+
+| Step | Command |
+|---|---|
+| Create venv | `cd backend && python -m venv .venv` |
+| Setup env | `copy .env.example .env` |
+| Install frontend | `cd frontend && npm install --legacy-peer-deps` |
+| Install backend | `cd backend && .\.venv\Scripts\python -m pip install -r requirements.txt` |
+| Run backend | `cd backend && .\.venv\Scripts\python -m uvicorn api.main:app --reload --port 8000` |
+| Run frontend | `cd frontend && npm run dev` |
+
+---
 # 🚀 Installation Guide
 
 ## Clone Repository
