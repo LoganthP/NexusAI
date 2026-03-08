@@ -1,12 +1,24 @@
-<h1 align="center"> Nexus AI — Enterprise RAG Intelligence Platform </h1>
+<h1 align="center">🧠 Nexus AI</h1>
+<h3 align="center">Enterprise RAG Intelligence Platform</h3>
 
-![Python](https://img.shields.io/badge/Python-3.10-blue)
-![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
-![React](https://img.shields.io/badge/React-Frontend-blue)
-![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
-![RAG](https://img.shields.io/badge/AI-RAG%20Pipeline-purple)
-![License](https://img.shields.io/badge/license-MIT-green)
+<p align="center">
+AI-powered enterprise knowledge system built with <b>Retrieval-Augmented Generation</b>.
+</p>
 
+<p align="center">
+
+<img src="https://img.shields.io/badge/Python-3.10-blue?logo=python&logoColor=white"/>
+<img src="https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white"/>
+<img src="https://img.shields.io/badge/React-Frontend-61DAFB?logo=react&logoColor=black"/>
+<img src="https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker&logoColor=white"/>
+<img src="https://img.shields.io/badge/AI-RAG%20Pipeline-purple"/>
+<img src="https://img.shields.io/badge/License-MIT-green"/>
+
+</p>
+
+<p align="center">
+⚡ Semantic Search • 🧠 AI Reasoning • 📊 Enterprise Analytics • 📄 Document Intelligence
+</p>
 A **production-grade Retrieval-Augmented Generation (RAG) platform** designed for **enterprise document intelligence**.
 
 Query internal company knowledge such as:
